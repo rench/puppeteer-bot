@@ -1,0 +1,42 @@
+<html>
+<a id="video_link" href=""></a>
+<script>
+  var api = 'https://api.sigujx.com/jx/?url='
+  var api2 = 'https://8090.ylybz.cn/jiexi2019/?url='
+  var search = window.location.search
+  var url = null
+  var type = 'sigu'
+  if (search.indexOf('?') > -1) {
+    search = search.substr(1)
+    var arr = search.split('&')
+    if (arr.length == 1) {
+      var kv = arr[0].split('=')
+      if (kv.length == 1) {
+        url = kv[0]
+      } else {
+        url = kv[1]
+      }
+    } else if (arr.length == 2) {
+      for (var i = 0; i < arr.length; i++) {
+        var pname = arr[i].split('=')[0]
+        var pvalue = arr[i].split('=')[1]
+        if (pname == 'type') {
+          type = pvalue
+        } else if (pname == 'url') {
+          url = pvalue
+        }
+      }
+    }
+    console.log(type, url)
+  }
+  setTimeout(function () {
+    if (type == '8090') {
+      document.getElementById('video_link').href = api2 + url
+    } else {
+      document.getElementById('video_link').href = api + url
+    }
+    document.getElementById('video_link').click()
+  }, 110)
+</script>
+
+</html>
